@@ -33,10 +33,10 @@ public static class DependencyInjection
 
         services.Scan(selector => selector.FromAssemblies(
             typeof(DependencyInjection).Assembly
-                ).AddClasses(publicOnly:false).UsingRegistrationStrategy(RegistrationStrategy.Skip).AsImplementedInterfaces().WithScopedLifetime());
+                ).AddClasses(publicOnly:false)
+            .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+            .AsImplementedInterfaces().WithScopedLifetime());
 
-        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
-        services.AddAutoMapper(typeof(DependencyInjection).Assembly);
         return services;
     }
 }
