@@ -15,7 +15,7 @@ public sealed class CategoriesController : ApiController
     }
 
     [HttpPost]
-    //[RoleFilter("Category.Add")]
+    //[RoleFilter("Category.Add")] 
     public async Task<IActionResult> Add(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         var response= await _mediator.Send(request, cancellationToken);
@@ -29,7 +29,7 @@ public sealed class CategoriesController : ApiController
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpPut]
     //[RoleFilter("Category.Update")]
     public async Task<IActionResult> Update(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
@@ -37,11 +37,11 @@ public sealed class CategoriesController : ApiController
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpGet]
     //[RoleFilter("Category.GetAll")]
-    public async Task<IActionResult> GetAll(GetCategoriesQuery request, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAll([FromQuery] GetCategoriesQuery request, CancellationToken cancellationToken )
     {
-        var response= await _mediator.Send(request, cancellationToken);
+        var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
 

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using NTierArchitecture.Business.Behaviors;
 using NTierArchitecture.Entities.Models;
@@ -19,6 +20,10 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
         services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+
+        services.AddMemoryCache();
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
 
         return services;
     }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NTierArchitecture.Business.Features.Category.Get;
 using NTierArchitecture.Business.Features.Products.CreateProduct;
 using NTierArchitecture.Business.Features.Products.GetProduct;
 using NTierArchitecture.Business.Features.Products.UpdateProduct;
@@ -20,7 +21,7 @@ public sealed class ProductsController : ApiController
         return NoContent();
     }
 
-    [HttpPost]
+    [HttpPut]
     //[RoleFilter("Product.Update")]
     public async Task<IActionResult> Update(UpdateProductCommand request, CancellationToken cancellationToken)
     {
@@ -28,9 +29,9 @@ public sealed class ProductsController : ApiController
         return NoContent();
     }
 
-    [HttpPost]
-    //[RoleFilter("Product.GetAll")]
-    public async Task<IActionResult> GetAll(GetProductsQuery request, CancellationToken cancellationToken)
+    [HttpGet]
+    //[RoleFilter("Category.GetAll")]
+    public async Task<IActionResult> GetAll([FromQuery] GetProductsQuery request, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);

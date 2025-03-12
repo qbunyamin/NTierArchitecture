@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Caching.Memory;
+using NTierArchitecture.Business.Features.Products.GetProduct;
 using NTierArchitecture.Entities.Models;
 using NTierArchitecture.Entities.Repositories;
 
@@ -17,7 +19,6 @@ internal sealed class UpdateProductCommandHandler :IRequestHandler<UpdateProduct
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-
     public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         Product product = await _productRepository.GetByIdAsync(p => p.Id == request.CategoryId, cancellationToken);

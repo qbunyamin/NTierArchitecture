@@ -12,3 +12,4 @@ namespace NTierArchitecture.Business.Features.Category.Get;
 
 public sealed record GetCategoriesQuery() : IRequest<List<Entities.Models.Category>>;
 
+

@@ -6,7 +6,4 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NTierArchitecture.Entities.Repositories;
-public interface ICategoryRepository : IRepository<Category>
-{
-
-}
+public interface ICategoryRepository : IRepository<Category>;

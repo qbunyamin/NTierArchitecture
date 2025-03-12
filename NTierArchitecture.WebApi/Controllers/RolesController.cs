@@ -19,8 +19,8 @@ public sealed class RolesController : ApiController
         return NoContent();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> GetAll(GetRoleQuery request, CancellationToken cancellationToken)
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] GetRoleQuery request, CancellationToken cancellationToken)
     {
         var response = await _mediator.Send(request, cancellationToken);
         return Ok(response);

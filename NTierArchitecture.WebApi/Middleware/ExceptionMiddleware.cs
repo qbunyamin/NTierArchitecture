@@ -1,9 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using MediatR;
+using Newtonsoft.Json;
+using NTierArchitecture.WebApi.Controllers;
 
 namespace NTierArchitecture.WebApi.Middleware;
 
 public sealed class ExceptionMiddleware :IMiddleware
 {
+    private readonly LogController _loggggg;
+
+    public ExceptionMiddleware( LogController loggggg)
+    {
+        _loggggg = loggggg ?? throw new ArgumentNullException(nameof(loggggg));
+    }
+
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try
@@ -20,10 +29,13 @@ public sealed class ExceptionMiddleware :IMiddleware
     {
         context.Response.StatusCode = 500;// hata kodu verilmeli
 
+        _loggggg.LoggerMetod(context,ex);// hatayı logla
+
         return context.Response.WriteAsync(new ErrorResult
         {
-            Message = ex.Message
+            Message = ex.InnerException.Message
         }.ToString());
+
     }
 }
 
